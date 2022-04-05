@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IB_Labs
 {
-    public partial class Main : Form
+    public partial class SymmetricForm : Form
     {
-        public Main()
+        public SymmetricForm()
         {
             InitializeComponent();
         }
