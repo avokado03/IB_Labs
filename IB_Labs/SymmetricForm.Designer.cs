@@ -30,31 +30,33 @@ namespace IB_Labs
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.SummaryDataGridView = new System.Windows.Forms.DataGridView();
+            this.summaryDataGridView = new System.Windows.Forms.DataGridView();
             this.Algorithm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EncryptionTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DecryptionTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AllTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SummaryGroupBox = new System.Windows.Forms.GroupBox();
-            this.TestingGroupBox = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.FilePathTextBox = new System.Windows.Forms.TextBox();
-            this.TestStartBtn = new System.Windows.Forms.Button();
+            this.summaryGroupBox = new System.Windows.Forms.GroupBox();
+            this.testingGroupBox = new System.Windows.Forms.GroupBox();
+            this.startBtn = new System.Windows.Forms.Button();
             this.ErrorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.SummaryDataGridView)).BeginInit();
-            this.SummaryGroupBox.SuspendLayout();
-            this.TestingGroupBox.SuspendLayout();
+            this.fileChoiseBtn = new System.Windows.Forms.Button();
+            this.filePathTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.summaryDataGridView)).BeginInit();
+            this.summaryGroupBox.SuspendLayout();
+            this.testingGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // SummaryDataGridView
+            // summaryDataGridView
             // 
-            this.SummaryDataGridView.AllowUserToAddRows = false;
-            this.SummaryDataGridView.AllowUserToDeleteRows = false;
-            this.SummaryDataGridView.AllowUserToOrderColumns = true;
-            this.SummaryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.SummaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.SummaryDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.summaryDataGridView.AllowUserToAddRows = false;
+            this.summaryDataGridView.AllowUserToDeleteRows = false;
+            this.summaryDataGridView.AllowUserToOrderColumns = true;
+            this.summaryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.summaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.summaryDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Algorithm,
             this.Mode,
             this.EncryptionTime,
@@ -69,16 +71,16 @@ namespace IB_Labs
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.SummaryDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.SummaryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SummaryDataGridView.Location = new System.Drawing.Point(3, 18);
-            this.SummaryDataGridView.Name = "SummaryDataGridView";
-            this.SummaryDataGridView.ReadOnly = true;
-            this.SummaryDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.SummaryDataGridView.RowHeadersWidth = 10;
-            this.SummaryDataGridView.RowTemplate.Height = 24;
-            this.SummaryDataGridView.Size = new System.Drawing.Size(915, 199);
-            this.SummaryDataGridView.TabIndex = 0;
+            this.summaryDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.summaryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.summaryDataGridView.Location = new System.Drawing.Point(3, 18);
+            this.summaryDataGridView.Name = "summaryDataGridView";
+            this.summaryDataGridView.ReadOnly = true;
+            this.summaryDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.summaryDataGridView.RowHeadersWidth = 10;
+            this.summaryDataGridView.RowTemplate.Height = 24;
+            this.summaryDataGridView.Size = new System.Drawing.Size(915, 199);
+            this.summaryDataGridView.TabIndex = 0;
             // 
             // Algorithm
             // 
@@ -115,66 +117,44 @@ namespace IB_Labs
             this.AllTime.Name = "AllTime";
             this.AllTime.ReadOnly = true;
             // 
-            // SummaryGroupBox
+            // summaryGroupBox
             // 
-            this.SummaryGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.summaryGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SummaryGroupBox.Controls.Add(this.SummaryDataGridView);
-            this.SummaryGroupBox.Location = new System.Drawing.Point(3, 130);
-            this.SummaryGroupBox.Name = "SummaryGroupBox";
-            this.SummaryGroupBox.Size = new System.Drawing.Size(921, 220);
-            this.SummaryGroupBox.TabIndex = 2;
-            this.SummaryGroupBox.TabStop = false;
-            this.SummaryGroupBox.Text = "Результаты";
+            this.summaryGroupBox.Controls.Add(this.summaryDataGridView);
+            this.summaryGroupBox.Location = new System.Drawing.Point(3, 130);
+            this.summaryGroupBox.Name = "summaryGroupBox";
+            this.summaryGroupBox.Size = new System.Drawing.Size(921, 220);
+            this.summaryGroupBox.TabIndex = 2;
+            this.summaryGroupBox.TabStop = false;
+            this.summaryGroupBox.Text = "Результаты";
             // 
-            // TestingGroupBox
+            // testingGroupBox
             // 
-            this.TestingGroupBox.Controls.Add(this.ErrorLabel);
-            this.TestingGroupBox.Controls.Add(this.TestStartBtn);
-            this.TestingGroupBox.Controls.Add(this.FilePathTextBox);
-            this.TestingGroupBox.Controls.Add(this.label1);
-            this.TestingGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TestingGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.TestingGroupBox.Name = "TestingGroupBox";
-            this.TestingGroupBox.Size = new System.Drawing.Size(924, 124);
-            this.TestingGroupBox.TabIndex = 3;
-            this.TestingGroupBox.TabStop = false;
-            this.TestingGroupBox.Text = "Тестирование";
+            this.testingGroupBox.Controls.Add(this.startBtn);
+            this.testingGroupBox.Controls.Add(this.ErrorLabel);
+            this.testingGroupBox.Controls.Add(this.fileChoiseBtn);
+            this.testingGroupBox.Controls.Add(this.filePathTextBox);
+            this.testingGroupBox.Controls.Add(this.label1);
+            this.testingGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.testingGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.testingGroupBox.Name = "testingGroupBox";
+            this.testingGroupBox.Size = new System.Drawing.Size(924, 124);
+            this.testingGroupBox.TabIndex = 3;
+            this.testingGroupBox.TabStop = false;
+            this.testingGroupBox.Text = "Тестирование";
             // 
-            // label1
+            // startBtn
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(225, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Файл данных для тестирования:";
-            // 
-            // FilePathTextBox
-            // 
-            this.FilePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FilePathTextBox.Location = new System.Drawing.Point(251, 45);
-            this.FilePathTextBox.Name = "FilePathTextBox";
-            this.FilePathTextBox.ReadOnly = true;
-            this.FilePathTextBox.Size = new System.Drawing.Size(530, 22);
-            this.FilePathTextBox.TabIndex = 3;
-            // 
-            // TestStartBtn
-            // 
-            this.TestStartBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestStartBtn.Location = new System.Drawing.Point(795, 41);
-            this.TestStartBtn.Name = "TestStartBtn";
-            this.TestStartBtn.Size = new System.Drawing.Size(116, 31);
-            this.TestStartBtn.TabIndex = 4;
-            this.TestStartBtn.Text = "Старт";
-            this.TestStartBtn.UseVisualStyleBackColor = true;
-            this.TestStartBtn.Click += new System.EventHandler(this.TestStartBtn_Click);
+            this.startBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startBtn.Location = new System.Drawing.Point(818, 41);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(92, 31);
+            this.startBtn.TabIndex = 6;
+            this.startBtn.Text = "Старт";
+            this.startBtn.UseVisualStyleBackColor = true;
+            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
             // 
             // ErrorLabel
             // 
@@ -189,36 +169,78 @@ namespace IB_Labs
             this.ErrorLabel.TabIndex = 5;
             this.ErrorLabel.Visible = false;
             // 
+            // fileChoiseBtn
+            // 
+            this.fileChoiseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileChoiseBtn.Location = new System.Drawing.Point(700, 41);
+            this.fileChoiseBtn.Name = "fileChoiseBtn";
+            this.fileChoiseBtn.Size = new System.Drawing.Size(92, 31);
+            this.fileChoiseBtn.TabIndex = 4;
+            this.fileChoiseBtn.Text = "Выбор";
+            this.fileChoiseBtn.UseVisualStyleBackColor = true;
+            this.fileChoiseBtn.Click += new System.EventHandler(this.fileChoiseBtn_Click);
+            // 
+            // filePathTextBox
+            // 
+            this.filePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filePathTextBox.Location = new System.Drawing.Point(251, 45);
+            this.filePathTextBox.Name = "filePathTextBox";
+            this.filePathTextBox.ReadOnly = true;
+            this.filePathTextBox.Size = new System.Drawing.Size(420, 22);
+            this.filePathTextBox.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(225, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Файл данных для тестирования:";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.InitialDirectory = "C:\\";
+            this.openFileDialog.Title = "Выбор файла";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
+            // 
             // SymmetricForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 350);
-            this.Controls.Add(this.TestingGroupBox);
-            this.Controls.Add(this.SummaryGroupBox);
+            this.Controls.Add(this.testingGroupBox);
+            this.Controls.Add(this.summaryGroupBox);
             this.Name = "SymmetricForm";
             this.Text = "Сравнение симметричных алгоритмов шифрования";
-            ((System.ComponentModel.ISupportInitialize)(this.SummaryDataGridView)).EndInit();
-            this.SummaryGroupBox.ResumeLayout(false);
-            this.TestingGroupBox.ResumeLayout(false);
-            this.TestingGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.summaryDataGridView)).EndInit();
+            this.summaryGroupBox.ResumeLayout(false);
+            this.testingGroupBox.ResumeLayout(false);
+            this.testingGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView SummaryDataGridView;
+        private System.Windows.Forms.DataGridView summaryDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Algorithm;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mode;
         private System.Windows.Forms.DataGridViewTextBoxColumn EncryptionTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn DecryptionTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn AllTime;
-        private System.Windows.Forms.GroupBox SummaryGroupBox;
-        private System.Windows.Forms.GroupBox TestingGroupBox;
-        private System.Windows.Forms.Button TestStartBtn;
-        private System.Windows.Forms.TextBox FilePathTextBox;
+        private System.Windows.Forms.GroupBox summaryGroupBox;
+        private System.Windows.Forms.GroupBox testingGroupBox;
+        private System.Windows.Forms.Button fileChoiseBtn;
+        private System.Windows.Forms.TextBox filePathTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label ErrorLabel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button startBtn;
     }
 }
