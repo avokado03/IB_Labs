@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using SymmetricLib.Models;
 
 namespace SymmetricLib.Algorithms.Interfaces
 {
@@ -10,17 +11,13 @@ namespace SymmetricLib.Algorithms.Interfaces
         /// <summary>
         /// Метод шифрования
         /// </summary>
-        /// <param name="path">Путь к файлу</param>
-        /// <param name="password">Пароль</param>
-        /// <param name="cipherMode">Режим работы алгоритма</param>
-        void Encrypt(string path, string password, CipherMode cipherMode);
+        /// <param name="parameters">Параметры для шифрования</param>
+        void Encrypt(AlgorithmParametersModel parameters);
 
         /// <summary>
         /// Метод дешифрации
         /// </summary>
-        /// <param name="path">Путь к зашифрованному файлу</param>
-        /// <param name="password">Пароль</param> 
-        /// <param name="cipherMode">Режим работы алгоритма</param>
-        void Decrypt(string path, string password, CipherMode cipherMode);
+        /// <param name="parameters">Параметры для дешифрации</param>
+        void Decrypt(AlgorithmParametersModel parameters);
     }
 }

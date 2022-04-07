@@ -41,13 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\AESStrategy.cs" />
     <Compile Include="Algorithms\Interfaces\ISymmetricStrategy.cs" />
     <Compile Include="Common\ExceptionMessages.cs" />
-    <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Common\SaltGenerator.cs" />
+    <Compile Include="Models\AlgorithmParametersModel.cs" />
+    <Compile Include="Models\AlgorithmResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Algorithms\AES\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
