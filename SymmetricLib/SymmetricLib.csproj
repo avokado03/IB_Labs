@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Algorithms\AESStrategy.cs" />
     <Compile Include="Algorithms\Interfaces\ISymmetricStrategy.cs" />
+    <Compile Include="Common\AlgorithmProperties.cs" />
     <Compile Include="Common\ExceptionMessages.cs" />
     <Compile Include="Common\SaltGenerator.cs" />
     <Compile Include="Models\AlgorithmParametersModel.cs" />

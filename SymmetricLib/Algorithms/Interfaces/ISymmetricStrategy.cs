@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using SymmetricLib.Models;
+﻿using SymmetricLib.Models;
 
 namespace SymmetricLib.Algorithms.Interfaces
 {
