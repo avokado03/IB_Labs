@@ -1,9 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Security.Cryptography;
-using SymmetricLib.Algorithms.Interfaces;
+﻿using SymmetricLib.Algorithms.Interfaces;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
+using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace SymmetricLib.Algorithms
 {
@@ -16,35 +17,23 @@ namespace SymmetricLib.Algorithms
         public void Encrypt(AlgorithmParametersModel parameters)
         {
             var salt = SaltGenerator.GenerateRandomSalt();
+            string encryptedFilePath = AlgorithmProperties.AESFileExtension(parameters.FilePath);
 
-            var key = new Rfc2898DeriveBytes(parameters.Password, 
-                salt, AlgorithmProperties.KEY_ITERATION_COUNT);
-
-            using(var AESAlgorithm = new RijndaelManaged())
+            using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt))
             {
-                AESAlgorithm.KeySize = AlgorithmProperties.KEY_SIZE;
-                AESAlgorithm.BlockSize = AlgorithmProperties.BLOCK_SIZE;
-                AESAlgorithm.Mode = parameters.Mode;
-                AESAlgorithm.Padding = PaddingMode.PKCS7;
-
-                AESAlgorithm.Key = key.GetBytes(AESAlgorithm.KeySize / 8);
-                AESAlgorithm.IV = key.GetBytes(AESAlgorithm.BlockSize / 8);
-
-
-                byte[] buffer = new byte[1048576];
+                byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
                 int read;
 
-                using (var outputStream = new FileStream(parameters.FilePath + AlgorithmProperties.AES_FILE_EXTENSION,
-                    FileMode.Create)) 
+                using (var outputStream = new FileStream(encryptedFilePath, FileMode.Create))
                 {
                     using (var inputStream = new FileStream(parameters.FilePath, FileMode.Open))
                     {
-                        using (var cryptoStream = new CryptoStream(outputStream, 
+                        using (var cryptoStream = new CryptoStream(outputStream,
                             AESAlgorithm.CreateEncryptor(), CryptoStreamMode.Write))
                         {
                             try
-                            {                             
-                                while((read = inputStream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                while ((read = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                                 {
                                     cryptoStream.Write(buffer, 0, read);
                                 }
@@ -54,7 +43,7 @@ namespace SymmetricLib.Algorithms
                                 throw ex;
                             }
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -62,7 +51,44 @@ namespace SymmetricLib.Algorithms
         /// <inheritdoc/>
         public void Decrypt(AlgorithmParametersModel parameters)
         {
-            throw new NotImplementedException();
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(parameters.Password);
+            byte[] salt = new byte[32];
+            string encryptedFilePath = AlgorithmProperties.AESFileExtension(parameters.FilePath);
+
+            using (var inputStream = new FileStream(encryptedFilePath, FileMode.Open))
+            {
+                inputStream.Write(salt, 0, salt.Length);
+
+                using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt))
+                {
+                    byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
+                    int read;
+
+                    using (var cryptoStream = new CryptoStream(inputStream,
+                        AESAlgorithm.CreateDecryptor(), CryptoStreamMode.Read))
+                    {
+                        using (var outputStream = new FileStream(parameters.FilePath, FileMode.Create))
+                        {
+                            try
+                            {
+                                while ((read = cryptoStream.Read(buffer, 0, buffer.Length)) > 0)
+                                {
+                                    outputStream.Write(buffer, 0, read);
+                                }
+                            }
+                            catch (CryptographicException ex_CryptographicException)
+                            {
+                                throw ex_CryptographicException;
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
 }

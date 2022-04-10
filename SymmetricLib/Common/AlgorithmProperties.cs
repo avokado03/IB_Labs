@@ -1,4 +1,6 @@
-﻿namespace SymmetricLib.Common
+﻿using System;
+
+namespace SymmetricLib.Common
 {
     /// <summary>
     /// Константы для работы с алгоритмами шифрования
@@ -30,7 +32,7 @@
         /// <summary>
         /// Расширение для AES-файлов
         /// </summary>
-        public const string AES_FILE_EXTENSION = ".aes";
+        public static Func<string, string> AESFileExtension = (string path) => path + ".aes";
 
         #endregion
     }
