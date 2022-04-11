@@ -67,7 +67,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\SymmetricDataService.cs" />
     <Compile Include="SymmetricForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,5 +108,6 @@
       <Name>SymmetricLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

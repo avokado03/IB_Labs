@@ -5,7 +5,7 @@ namespace SymmetricLib.Algorithms.Interfaces
     /// <summary>
     /// Контракт для стратегий алгоритмов
     /// </summary>
-    interface ISymmetricStrategy
+    public interface ISymmetricStrategy
     {
         /// <summary>
         /// Метод шифрования
