@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using SymmetricLib.Common;
+using IB_C = IB_Labs.Common;
 
 namespace IB_Labs
 {
@@ -26,7 +27,7 @@ namespace IB_Labs
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             filePathTextBox.Text = string.Empty;
-            ErrorLabel.Text = string.Empty;
+            errorLabel.Text = string.Empty;
             var fileName = openFileDialog.FileName;
             try
             {
@@ -37,14 +38,24 @@ namespace IB_Labs
             }
             catch (Exception ex)
             {
-                ErrorLabel.Text = ex.Message;
+                errorLabel.Text = ex.Message;
             }
         }
 
         // Запускает шифрацию/дешифрацию
         private void startBtn_Click(object sender, EventArgs e)
         {
-
+            string path = filePathTextBox.Text;
+            string password = passwordTextBox.Text;
+            try
+            {
+                if (password == string.Empty || string.IsNullOrWhiteSpace(password))
+                    throw new ArgumentException(IB_C.ExceptionMessages.PASSWORD_ERROR_MESSAGE);
+            }
+            catch(Exception ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
         }
     }
 }
