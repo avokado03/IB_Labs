@@ -16,10 +16,5 @@ namespace SymmetricLib.Models
         /// Пароль
         /// </summary>
         public string Password { get; set; }
-
-        /// <summary>
-        /// Режим работы
-        /// </summary>
-        public CipherMode Mode { get; set; }
     }
 }

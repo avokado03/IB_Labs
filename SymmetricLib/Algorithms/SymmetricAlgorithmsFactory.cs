@@ -17,7 +17,7 @@ namespace SymmetricLib.Algorithms
         /// <param name="parameters">Параметры алгоритма</param>
         /// <param name="salt">Соль</param>
         /// <returns>Объект <see cref="RijndaelManaged"/></returns>
-        public static RijndaelManaged GetRijndael(AlgorithmParametersModel parameters, byte[] salt)
+        public static RijndaelManaged GetRijndael(AlgorithmParametersModel parameters, byte[] salt, CipherMode mode)
         {
             var aes = new RijndaelManaged();
 
@@ -26,7 +26,7 @@ namespace SymmetricLib.Algorithms
 
             aes.KeySize = AlgorithmProperties.KEY_SIZE;
             aes.BlockSize = AlgorithmProperties.BLOCK_SIZE;
-            aes.Mode = parameters.Mode;
+            aes.Mode = mode;
             aes.Padding = PaddingMode.PKCS7;
 
             aes.Key = key.GetBytes(aes.KeySize / 8);

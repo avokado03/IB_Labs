@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 using SymmetricLib.Algorithms.Interfaces;
+using SymmetricLib.Common;
 using SymmetricLib.Models;
 
 namespace IB_Labs.Services
@@ -37,8 +36,35 @@ namespace IB_Labs.Services
         public List<AlgorithmResultModel> GetAlgorithmResults(AlgorithmParametersModel algorithmParameters)
         {
             var results = new List<AlgorithmResultModel>();
+            try
+            {
+                if (Strategies is null)
+                    throw new NullReferenceException("Мессадж сделай не забудь");
+                foreach (var alg in Strategies)
+                {
+                    foreach (var mode in AlgorithmHelpers.ModesToArray())
+                    {                           
+                        var result = new AlgorithmResultModel();
+                        var cm = (CipherMode)mode;
+                        result.AlgorithmName = alg.AlgorithmName;
+                        result.AlgorithmMode = AlgorithmHelpers.GetStringMode(cm);
 
+                        _stopwatch.Start();
+                        alg.Encrypt(algorithmParameters, cm);
+                        _stopwatch.Stop();
+                        result.EncryptionTime = _stopwatch.ElapsedMilliseconds / 1000;
 
+                        _stopwatch.Restart();
+                        alg.Decrypt(algorithmParameters, cm);
+                        _stopwatch.Stop();
+                        result.DecryptionTime = _stopwatch.ElapsedMilliseconds / 1000;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             return results;
         }
     }

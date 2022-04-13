@@ -13,13 +13,15 @@ namespace SymmetricLib.Algorithms
     /// </summary>
     public class AESStrategy : ISymmetricStrategy
     {
-        /// <inheritdoc/>
-        public void Encrypt(AlgorithmParametersModel parameters)
-        {
-            var salt = SaltGenerator.GenerateRandomSalt();
-            string encryptedFilePath = AlgorithmProperties.AESFileExtension(parameters.FilePath);
+        public string AlgorithmName => "AES 128 (Rijndael)";
 
-            using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt))
+        /// <inheritdoc/>
+        public void Encrypt(AlgorithmParametersModel parameters, CipherMode mode)
+        {
+            var salt = AlgorithmHelpers.GenerateRandomSalt();
+            string encryptedFilePath = AlgorithmHelpers.AESFileExtension(parameters.FilePath);
+
+            using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt, mode))
             {
                 byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
                 int read;
@@ -49,17 +51,17 @@ namespace SymmetricLib.Algorithms
         }
 
         /// <inheritdoc/>
-        public void Decrypt(AlgorithmParametersModel parameters)
+        public void Decrypt(AlgorithmParametersModel parameters, CipherMode mode)
         {
             byte[] passwordBytes = Encoding.UTF8.GetBytes(parameters.Password);
             byte[] salt = new byte[32];
-            string encryptedFilePath = AlgorithmProperties.AESFileExtension(parameters.FilePath);
+            string encryptedFilePath = AlgorithmHelpers.AESFileExtension(parameters.FilePath);
 
             using (var inputStream = new FileStream(encryptedFilePath, FileMode.Open))
             {
                 inputStream.Write(salt, 0, salt.Length);
 
-                using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt))
+                using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt, mode))
                 {
                     byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
                     int read;
