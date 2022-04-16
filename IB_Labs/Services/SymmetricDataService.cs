@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Security.Cryptography;
 using SymmetricLib.Algorithms.Contracts;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
+using IB_C = IB_Labs.Common;
 
 namespace IB_Labs.Services
 {
@@ -40,24 +39,23 @@ namespace IB_Labs.Services
             try
             {
                 if (Strategies is null)
-                    throw new NullReferenceException("Мессадж сделай не забудь");
+                    throw new NullReferenceException(IB_C.ExceptionMessages.EMPTY_ALGORITHMS_LIST_ERROR_MESSAGE);
                 foreach (var alg in Strategies)
                 {
                     var modes = AlgorithmHelpers.SupportedModes;
                     foreach (var mode in modes)
                     {                           
                         var result = new AlgorithmResultModel();
-                        var cm = mode;
                         result.AlgorithmName = alg.AlgorithmName;
-                        result.AlgorithmMode = AlgorithmHelpers.GetStringMode(cm);
+                        result.AlgorithmMode = AlgorithmHelpers.GetStringMode(mode);
 
                         _stopwatch.Start();
-                        alg.Encrypt(algorithmParameters, cm);
+                        alg.Encrypt(algorithmParameters, mode);
                         _stopwatch.Stop();
                         result.EncryptionTime = (double) _stopwatch.ElapsedMilliseconds / 1000;
 
                         _stopwatch.Restart();
-                        alg.Decrypt(algorithmParameters, cm);
+                        alg.Decrypt(algorithmParameters, mode);
                         _stopwatch.Stop();
                         result.DecryptionTime = (double) _stopwatch.ElapsedMilliseconds / 1000;
 

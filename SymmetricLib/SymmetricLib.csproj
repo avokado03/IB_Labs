@@ -45,6 +45,8 @@
     <Compile Include="Algorithms\DESStrategy.cs" />
     <Compile Include="Algorithms\Contracts\StrategyFinder.cs" />
     <Compile Include="Algorithms\Contracts\SymmetricStrategyBase.cs" />
+    <Compile Include="Algorithms\RC2Strategy.cs" />
+    <Compile Include="Algorithms\TripleDESStrategy.cs" />
     <Compile Include="Common\AlgorithmProperties.cs" />
     <Compile Include="Common\ExceptionMessages.cs" />
     <Compile Include="Common\AlgorithmHelpers.cs" />
