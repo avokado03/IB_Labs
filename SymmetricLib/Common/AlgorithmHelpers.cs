@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 
 namespace SymmetricLib.Common
@@ -40,9 +41,15 @@ namespace SymmetricLib.Common
         #region Режимы работы алгоритмов
 
         /// <summary>
-        /// Возвращает режимы работы массивом
+        /// Возвращает допустимые режимы работы списком
+        /// https://github.com/dotnet/corefx/blob/master/src/System.Security.Cryptography.Primitives/src/System/Security/Cryptography/CipherMode.cs#L18
         /// </summary>
-        public static Func<Array> ModesToArray = () => Enum.GetValues(typeof(CipherMode));
+        public static List<CipherMode> SupportedModes { 
+            get 
+            {
+                return new List<CipherMode> {CipherMode.CBC, CipherMode.ECB/*, CipherMode.CTS */};
+            } 
+        }
 
         /// <summary>
         /// Возвращает наименование режима работы

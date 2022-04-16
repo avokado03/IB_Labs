@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace SymmetricLib.Models
+﻿namespace SymmetricLib.Models
 {
     /// <summary>
     /// Модель, представляющая параметры шифрования
@@ -10,11 +8,17 @@ namespace SymmetricLib.Models
         /// <summary>
         /// Путь к файлу
         /// </summary>
-        public string FilePath { get; set; }
+        public string FilePath { get; private set; }
 
         /// <summary>
         /// Пароль
         /// </summary>
-        public string Password { get; set; }
+        public string Password { get; private set; }
+
+        public AlgorithmParametersModel(string filePath, string password)
+        {
+            FilePath = filePath;
+            Password = password;
+        }
     }
 }

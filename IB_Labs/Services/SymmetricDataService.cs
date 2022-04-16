@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using SymmetricLib.Algorithms.Interfaces;
@@ -42,22 +43,25 @@ namespace IB_Labs.Services
                     throw new NullReferenceException("Мессадж сделай не забудь");
                 foreach (var alg in Strategies)
                 {
-                    foreach (var mode in AlgorithmHelpers.ModesToArray())
+                    var modes = AlgorithmHelpers.SupportedModes;
+                    foreach (var mode in modes)
                     {                           
                         var result = new AlgorithmResultModel();
-                        var cm = (CipherMode)mode;
+                        var cm = mode;
                         result.AlgorithmName = alg.AlgorithmName;
                         result.AlgorithmMode = AlgorithmHelpers.GetStringMode(cm);
 
                         _stopwatch.Start();
                         alg.Encrypt(algorithmParameters, cm);
                         _stopwatch.Stop();
-                        result.EncryptionTime = _stopwatch.ElapsedMilliseconds / 1000;
+                        result.EncryptionTime = (double) _stopwatch.ElapsedMilliseconds / 1000;
 
                         _stopwatch.Restart();
                         alg.Decrypt(algorithmParameters, cm);
                         _stopwatch.Stop();
-                        result.DecryptionTime = _stopwatch.ElapsedMilliseconds / 1000;
+                        result.DecryptionTime = (double) _stopwatch.ElapsedMilliseconds / 1000;
+
+                        results.Add(result);
                     }
                 }
             }

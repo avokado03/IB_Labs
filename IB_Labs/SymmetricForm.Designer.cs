@@ -29,23 +29,18 @@ namespace IB_Labs
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.summaryDataGridView = new System.Windows.Forms.DataGridView();
-            this.Algorithm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EncryptionTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DecryptionTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AllTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.summaryGroupBox = new System.Windows.Forms.GroupBox();
             this.testingGroupBox = new System.Windows.Forms.GroupBox();
+            this.errorLabel = new System.Windows.Forms.Label();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.startBtn = new System.Windows.Forms.Button();
             this.fileChoiseBtn = new System.Windows.Forms.Button();
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.label2 = new System.Windows.Forms.Label();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.summaryDataGridView)).BeginInit();
             this.summaryGroupBox.SuspendLayout();
             this.testingGroupBox.SuspendLayout();
@@ -58,22 +53,16 @@ namespace IB_Labs
             this.summaryDataGridView.AllowUserToOrderColumns = true;
             this.summaryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.summaryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.summaryDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Algorithm,
-            this.Mode,
-            this.EncryptionTime,
-            this.DecryptionTime,
-            this.AllTime});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.summaryDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.summaryDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.summaryDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.summaryDataGridView.Location = new System.Drawing.Point(3, 18);
             this.summaryDataGridView.Name = "summaryDataGridView";
@@ -83,41 +72,6 @@ namespace IB_Labs
             this.summaryDataGridView.RowTemplate.Height = 24;
             this.summaryDataGridView.Size = new System.Drawing.Size(915, 231);
             this.summaryDataGridView.TabIndex = 0;
-            // 
-            // Algorithm
-            // 
-            this.Algorithm.HeaderText = "Алгоритм";
-            this.Algorithm.MinimumWidth = 6;
-            this.Algorithm.Name = "Algorithm";
-            this.Algorithm.ReadOnly = true;
-            // 
-            // Mode
-            // 
-            this.Mode.HeaderText = "Режим";
-            this.Mode.MinimumWidth = 6;
-            this.Mode.Name = "Mode";
-            this.Mode.ReadOnly = true;
-            // 
-            // EncryptionTime
-            // 
-            this.EncryptionTime.HeaderText = "Время на шифрование, c";
-            this.EncryptionTime.MinimumWidth = 6;
-            this.EncryptionTime.Name = "EncryptionTime";
-            this.EncryptionTime.ReadOnly = true;
-            // 
-            // DecryptionTime
-            // 
-            this.DecryptionTime.HeaderText = "Время на дешифрование, с";
-            this.DecryptionTime.MinimumWidth = 6;
-            this.DecryptionTime.Name = "DecryptionTime";
-            this.DecryptionTime.ReadOnly = true;
-            // 
-            // AllTime
-            // 
-            this.AllTime.HeaderText = "Общее время, с";
-            this.AllTime.MinimumWidth = 6;
-            this.AllTime.Name = "AllTime";
-            this.AllTime.ReadOnly = true;
             // 
             // summaryGroupBox
             // 
@@ -148,6 +102,37 @@ namespace IB_Labs
             this.testingGroupBox.TabIndex = 3;
             this.testingGroupBox.TabStop = false;
             this.testingGroupBox.Text = "Тестирование";
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(15, 145);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(0, 17);
+            this.errorLabel.TabIndex = 9;
+            // 
+            // passwordTextBox
+            // 
+            this.passwordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.passwordTextBox.Location = new System.Drawing.Point(251, 74);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(420, 22);
+            this.passwordTextBox.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(59, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(178, 17);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Пароль для шифрования:";
             // 
             // startBtn
             // 
@@ -200,37 +185,6 @@ namespace IB_Labs
             this.openFileDialog.Title = "Выбор файла";
             this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(59, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(178, 17);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Пароль для шифрования:";
-            // 
-            // passwordTextBox
-            // 
-            this.passwordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.passwordTextBox.Location = new System.Drawing.Point(251, 74);
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(420, 22);
-            this.passwordTextBox.TabIndex = 8;
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(15, 145);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(0, 17);
-            this.errorLabel.TabIndex = 9;
-            // 
             // SymmetricForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -251,11 +205,6 @@ namespace IB_Labs
         #endregion
 
         private System.Windows.Forms.DataGridView summaryDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Algorithm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EncryptionTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DecryptionTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AllTime;
         private System.Windows.Forms.GroupBox summaryGroupBox;
         private System.Windows.Forms.GroupBox testingGroupBox;
         private System.Windows.Forms.Button fileChoiseBtn;

@@ -28,6 +28,7 @@ namespace SymmetricLib.Algorithms
 
                 using (var outputStream = new FileStream(encryptedFilePath, FileMode.Create))
                 {
+                    outputStream.Write(salt, 0, salt.Length);
                     using (var inputStream = new FileStream(parameters.FilePath, FileMode.Open))
                     {
                         using (var cryptoStream = new CryptoStream(outputStream,
@@ -49,7 +50,6 @@ namespace SymmetricLib.Algorithms
                 }
             }
         }
-
         /// <inheritdoc/>
         public void Decrypt(AlgorithmParametersModel parameters, CipherMode mode)
         {
@@ -59,7 +59,7 @@ namespace SymmetricLib.Algorithms
 
             using (var inputStream = new FileStream(encryptedFilePath, FileMode.Open))
             {
-                inputStream.Write(salt, 0, salt.Length);
+                inputStream.Read(salt, 0, salt.Length);
 
                 using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt, mode))
                 {
@@ -77,10 +77,6 @@ namespace SymmetricLib.Algorithms
                                 {
                                     outputStream.Write(buffer, 0, read);
                                 }
-                            }
-                            catch (CryptographicException ex_CryptographicException)
-                            {
-                                throw ex_CryptographicException;
                             }
                             catch (Exception ex)
                             {

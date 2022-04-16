@@ -3,7 +3,9 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using SymmetricLib.Common;
+using IB_Labs.Services;
 using IB_C = IB_Labs.Common;
+using SymmetricLib.Models;
 
 namespace IB_Labs
 {
@@ -11,9 +13,12 @@ namespace IB_Labs
     // (Сравнение производительности симметричных алгоритмов шифрования)
     public partial class SymmetricForm : Form
     {
+        private readonly SymmetricDataService _dataService;
+
         public SymmetricForm()
         {
             InitializeComponent();
+            _dataService = new SymmetricDataService();
         }
 
         // Кнопка, открывающая диалог выбора файла
@@ -51,8 +56,11 @@ namespace IB_Labs
             {
                 if (password == string.Empty || string.IsNullOrWhiteSpace(password))
                     throw new ArgumentException(IB_C.ExceptionMessages.PASSWORD_ERROR_MESSAGE);
+                var parameters = new AlgorithmParametersModel(path, password);
+
+                summaryDataGridView.DataSource = _dataService.GetAlgorithmResults(parameters);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorLabel.Text = ex.Message;
             }
