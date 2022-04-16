@@ -1,92 +1,39 @@
 ﻿using SymmetricLib.Algorithms.Interfaces;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
-using System;
-using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace SymmetricLib.Algorithms
 {
     /// <summary>
     /// Стратегия для алгоритма AES
     /// </summary>
-    public class AESStrategy : ISymmetricStrategy
+    public class AESStrategy : SymmetricStrategyBase
     {
-        public string AlgorithmName => "AES 128 (Rijndael)";
-
-        /// <inheritdoc/>
-        public void Encrypt(AlgorithmParametersModel parameters, CipherMode mode)
+        public AESStrategy()
         {
-            var salt = AlgorithmHelpers.GenerateRandomSalt();
-            string encryptedFilePath = AlgorithmHelpers.AESFileExtension(parameters.FilePath);
-
-            using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt, mode))
-            {
-                byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
-                int read;
-
-                using (var outputStream = new FileStream(encryptedFilePath, FileMode.Create))
-                {
-                    outputStream.Write(salt, 0, salt.Length);
-                    using (var inputStream = new FileStream(parameters.FilePath, FileMode.Open))
-                    {
-                        using (var cryptoStream = new CryptoStream(outputStream,
-                            AESAlgorithm.CreateEncryptor(), CryptoStreamMode.Write))
-                        {
-                            try
-                            {
-                                while ((read = inputStream.Read(buffer, 0, buffer.Length)) > 0)
-                                {
-                                    cryptoStream.Write(buffer, 0, read);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                throw ex;
-                            }
-                        }
-                    }
-                }
-            }
+            AlgorithmName = "AES";
         }
-        /// <inheritdoc/>
-        public void Decrypt(AlgorithmParametersModel parameters, CipherMode mode)
+
+        protected override SymmetricAlgorithm GetAlgorithm(
+            AlgorithmParametersModel parameters, 
+            byte[] salt, 
+            CipherMode mode)
         {
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(parameters.Password);
-            byte[] salt = new byte[32];
-            string encryptedFilePath = AlgorithmHelpers.AESFileExtension(parameters.FilePath);
+            var aes = new RijndaelManaged();
 
-            using (var inputStream = new FileStream(encryptedFilePath, FileMode.Open))
-            {
-                inputStream.Read(salt, 0, salt.Length);
+            var key = new Rfc2898DeriveBytes(parameters.Password,
+                salt, AlgorithmProperties.KEY_ITERATION_COUNT);
 
-                using (var AESAlgorithm = SymmetricAlgorithmsFactory.GetRijndael(parameters, salt, mode))
-                {
-                    byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
-                    int read;
+            aes.KeySize = AlgorithmProperties.AES_KEY_SIZE;
+            aes.BlockSize = AlgorithmProperties.AES_BLOCK_SIZE;
+            aes.Mode = mode;
+            aes.Padding = PaddingMode.PKCS7;
 
-                    using (var cryptoStream = new CryptoStream(inputStream,
-                        AESAlgorithm.CreateDecryptor(), CryptoStreamMode.Read))
-                    {
-                        using (var outputStream = new FileStream(parameters.FilePath, FileMode.Create))
-                        {
-                            try
-                            {
-                                while ((read = cryptoStream.Read(buffer, 0, buffer.Length)) > 0)
-                                {
-                                    outputStream.Write(buffer, 0, read);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                throw ex;
-                            }
-                        }
-                    }
-                }
+            aes.Key = key.GetBytes(aes.KeySize / 8);
+            aes.IV = key.GetBytes(aes.BlockSize / 8);
 
-            }
+            return aes;
         }
     }
 }

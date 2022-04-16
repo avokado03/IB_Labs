@@ -24,8 +24,8 @@ namespace SymmetricLib.Algorithms
             var key = new Rfc2898DeriveBytes(parameters.Password,
                 salt, AlgorithmProperties.KEY_ITERATION_COUNT);
 
-            aes.KeySize = AlgorithmProperties.KEY_SIZE;
-            aes.BlockSize = AlgorithmProperties.BLOCK_SIZE;
+            aes.KeySize = AlgorithmProperties.AES_KEY_SIZE;
+            aes.BlockSize = AlgorithmProperties.AES_BLOCK_SIZE;
             aes.Mode = mode;
             aes.Padding = PaddingMode.PKCS7;
 
@@ -35,6 +35,22 @@ namespace SymmetricLib.Algorithms
             return aes;
         }
 
+        public static DES GetDES(AlgorithmParametersModel parameters, byte[] salt, CipherMode mode)
+        {
+            DES provider = DES.Create();
 
+            var key = new Rfc2898DeriveBytes(parameters.Password,
+                salt, AlgorithmProperties.KEY_ITERATION_COUNT);
+
+            provider.KeySize = AlgorithmProperties.DES_KEY_SIZE;
+            provider.BlockSize = AlgorithmProperties.DES_BLOCK_SIZE;
+            provider.Mode = mode;
+            provider.Padding = PaddingMode.PKCS7;
+
+            provider.Key = key.GetBytes(provider.KeySize / 8);
+            provider.IV = key.GetBytes(provider.BlockSize / 8);
+
+            return provider;
+        }
     }
 }

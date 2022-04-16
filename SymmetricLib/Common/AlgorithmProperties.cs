@@ -6,14 +6,26 @@
     public class AlgorithmProperties
     {
         /// <summary>
-        /// Размер ключа шифрования
+        /// Размер ключа шифрования AES
         /// </summary>
-        public const int KEY_SIZE = 256;
+        public const int AES_KEY_SIZE = 256;
 
         /// <summary>
-        /// Размер блока шифрования
+        /// Размер ключа шифрования DES
         /// </summary>
-        public const int BLOCK_SIZE = 128;
+        public const int DES_KEY_SIZE = 64;
+
+        /// <summary>
+        /// Размер блока шифрования AES
+        /// </summary>
+        public const int AES_BLOCK_SIZE = 128;
+
+        /// <summary>
+        /// Размер блока шифрования DES
+        /// </summary>
+        public const int DES_BLOCK_SIZE = 64;
+
+
 
         /// <summary>
         /// Количество итераций при генерации ключа

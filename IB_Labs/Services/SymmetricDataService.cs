@@ -21,12 +21,12 @@ namespace IB_Labs.Services
         /// <summary>
         /// Список стратегий алгоритмов шифрования
         /// </summary>
-        public List<ISymmetricStrategy> Strategies { get; private set; }
+        public List<SymmetricStrategyBase> Strategies { get; private set; }
 
         public SymmetricDataService()
         {
             _stopwatch = new Stopwatch();
-            Strategies = InterfaceFinder.Find();
+            Strategies = StrategyFinder.Find();
         }
 
         /// <summary>
