@@ -1,4 +1,4 @@
-﻿using SymmetricLib.Algorithms.Interfaces;
+﻿using SymmetricLib.Algorithms.Contracts;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
 using System.Security.Cryptography;
@@ -13,8 +13,10 @@ namespace SymmetricLib.Algorithms
         public AESStrategy()
         {
             AlgorithmName = "AES";
+            OutputFileExtension = ".aes";
         }
 
+        /// <inheritdoc />
         protected override SymmetricAlgorithm GetAlgorithm(
             AlgorithmParametersModel parameters, 
             byte[] salt, 

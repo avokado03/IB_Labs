@@ -29,14 +29,11 @@ namespace SymmetricLib.Common
             return data;
         }
 
-        #region Расширения зашифрованных файлов
-
         /// <summary>
-        /// Расширение для AES-файлов
+        /// Путь и расширение для выходных файлов
         /// </summary>
-        public static Func<string, string> AESFileExtension = (string path) => path + ".aes";
-
-        #endregion
+        public static Func<string, string, string> GetOutputFilePathExtension = (string path, string extension) 
+            => path + extension;
 
         #region Режимы работы алгоритмов
 
@@ -47,7 +44,7 @@ namespace SymmetricLib.Common
         public static List<CipherMode> SupportedModes { 
             get 
             {
-                return new List<CipherMode> {CipherMode.CBC, CipherMode.ECB/*, CipherMode.CTS */};
+                return new List<CipherMode> { CipherMode.CBC, CipherMode.ECB };
             } 
         }
 

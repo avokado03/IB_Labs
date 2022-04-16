@@ -5,7 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SymmetricLib.Algorithms.Interfaces
+namespace SymmetricLib.Algorithms.Contracts
 {
     /// <summary>
     /// Контракт для стратегий алгоритмов
@@ -16,6 +16,8 @@ namespace SymmetricLib.Algorithms.Interfaces
         /// Наименование алгоритма
         /// </summary>
         public string AlgorithmName { get; protected set; }
+
+        public string OutputFileExtension { get; protected set; }
 
         /// <summary>
         /// Возвращает экземпляр алгоритма шифрования.
@@ -37,7 +39,8 @@ namespace SymmetricLib.Algorithms.Interfaces
         public void Encrypt(AlgorithmParametersModel parameters, CipherMode mode)
         {
             var salt = AlgorithmHelpers.GenerateRandomSalt();
-            string encryptedFilePath = AlgorithmHelpers.AESFileExtension(parameters.FilePath);
+            string encryptedFilePath = AlgorithmHelpers
+                .GetOutputFilePathExtension(parameters.FilePath, OutputFileExtension);
 
             using (SymmetricAlgorithm algorithm = GetAlgorithm(parameters, salt, mode))
             {
@@ -78,7 +81,8 @@ namespace SymmetricLib.Algorithms.Interfaces
         {
             byte[] passwordBytes = Encoding.UTF8.GetBytes(parameters.Password);
             byte[] salt = new byte[32];
-            string encryptedFilePath = AlgorithmHelpers.AESFileExtension(parameters.FilePath);
+            string encryptedFilePath = AlgorithmHelpers
+                .GetOutputFilePathExtension(parameters.FilePath, OutputFileExtension);
 
             using (var inputStream = new FileStream(encryptedFilePath, FileMode.Open))
             {

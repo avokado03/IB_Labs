@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Security.Cryptography;
-using SymmetricLib.Algorithms.Interfaces;
+using SymmetricLib.Algorithms.Contracts;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
 

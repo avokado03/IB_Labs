@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace SymmetricLib.Algorithms.Interfaces
+namespace SymmetricLib.Algorithms.Contracts
 {
     /// <summary>
     /// Класс-хелпер для поиска классов-стратегий
@@ -12,7 +12,8 @@ namespace SymmetricLib.Algorithms.Interfaces
     {
         /// <summary>
         /// Находит и создает инстансы классов,
-        /// реализующих интерфейс стратегий алгоритмов
+        /// наследуемых от абстрактного класса
+        /// стратегий алгоритмов
         /// </summary>
         public static List<SymmetricStrategyBase> Find()
         {
@@ -20,7 +21,7 @@ namespace SymmetricLib.Algorithms.Interfaces
                 Assembly.GetExecutingAssembly()
                 // из всех типов в сборке
                 .GetTypes()
-                // выбираем те, которые могут быть приведены к интерфейсу
+                // выбираем те, которые могут быть приведены к базовому классу
                 .Where(type => typeof(SymmetricStrategyBase).IsAssignableFrom(type))
                 .Where(type =>
                 !type.IsAbstract &&
