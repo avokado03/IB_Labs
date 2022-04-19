@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IB_Labs
 {
-    public partial class AssymmetricForm : Form
+    public partial class AsymmetricForm : Form
     {
-        public AssymmetricForm()
+        public AsymmetricForm()
         {
             InitializeComponent();
         }

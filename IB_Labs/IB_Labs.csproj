@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssymmetricForm.cs">
+    <Compile Include="AsymmetricForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AssymmetricForm.Designer.cs">
-      <DependentUpon>AssymmetricForm.cs</DependentUpon>
+    <Compile Include="AsymmetricForm.Designer.cs">
+      <DependentUpon>AsymmetricForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\ExceptionMessages.cs" />
     <Compile Include="Common\GlobalSupressions.cs" />
@@ -75,6 +75,9 @@
     <Compile Include="SymmetricForm.Designer.cs">
       <DependentUpon>SymmetricForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AsymmetricForm.resx">
+      <DependentUpon>AsymmetricForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

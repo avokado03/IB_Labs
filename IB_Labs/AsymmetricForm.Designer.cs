@@ -1,7 +1,7 @@
 ﻿
 namespace IB_Labs
 {
-    partial class AssymmetricForm
+    partial class AsymmetricForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,17 @@ namespace IB_Labs
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // AsymmetricForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "AssymmetricForm";
+            this.Name = "AsymmetricForm";
+            this.Text = "Изучение возможностей реализации асимметричного шифрования в .NET";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
