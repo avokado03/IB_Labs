@@ -52,6 +52,8 @@
     <Compile Include="AssymmetricForm.Designer.cs">
       <DependentUpon>AssymmetricForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ExceptionMessages.cs" />
+    <Compile Include="Common\GlobalSupressions.cs" />
     <Compile Include="DigitalSignatureForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +68,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SymmetricDataService.cs" />
     <Compile Include="SymmetricForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +87,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SymmetricForm.resx">
+      <DependentUpon>SymmetricForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -97,5 +103,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SymmetricLib\SymmetricLib.csproj">
+      <Project>{f8d52b71-bf51-4051-97c3-36a4993a2afd}</Project>
+      <Name>SymmetricLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
