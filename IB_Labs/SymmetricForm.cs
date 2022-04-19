@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
-using SymmetricLib.Common;
 using IB_Labs.Services;
-using IB_C = IB_Labs.Common;
 using SymmetricLib.Models;
+using System.Threading.Tasks;
+using IB_Labs.Common;
 
 namespace IB_Labs
 {
@@ -52,18 +52,39 @@ namespace IB_Labs
         {
             string path = filePathTextBox.Text;
             string password = passwordTextBox.Text;
-            try
+            Action<string, bool> setBtnsParams = (string text, bool enabled) => 
             {
-                if (password == string.Empty || string.IsNullOrWhiteSpace(password))
-                    throw new ArgumentException(IB_C.ExceptionMessages.PASSWORD_ERROR_MESSAGE);
-                var parameters = new AlgorithmParametersModel(path, password);
+                startBtn.Text = text;
+                fileChoiseBtn.Enabled = enabled;
+                startBtn.Enabled = enabled;
+            };
+            
 
-                summaryDataGridView.DataSource = _dataService.GetAlgorithmResults(parameters);
-            }
-            catch (Exception ex)
+            Action getData = async () => 
             {
-                errorLabel.Text = ex.Message;
-            }
+                try
+                {
+                    summaryDataGridView.DataSource = null;
+
+                    if (password == string.Empty || string.IsNullOrWhiteSpace(password))
+                        throw new ArgumentException(ExceptionMessages.PASSWORD_ERROR_MESSAGE);
+
+                    var parameters = new AlgorithmParametersModel(path, password);
+                    setBtnsParams.Invoke("Подождите...", false);
+                    summaryDataGridView.DataSource = await _dataService.GetAlgorithmResults(parameters);
+                }
+                catch (Exception ex)
+                {
+                    errorLabel.Text = ex.Message;
+                    summaryDataGridView.DataSource = null;
+                }
+                finally
+                {
+                    setBtnsParams.Invoke("Старт", true);
+                }
+            };
+
+            Task.Run(() => summaryDataGridView.BeginInvoke(getData));
         }
     }
 }

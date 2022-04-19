@@ -20,5 +20,11 @@
         /// </summary>
         public const string EMPTY_ALGORITHMS_LIST_ERROR_MESSAGE = 
             "Не обнаружено реализаций алгоритмов шифрования";
+
+        /// <summary>
+        /// Сообщение, возникающее, если файл или путь не найден
+        /// </summary>
+        public const string FILE_NOT_FOUND_ERROR_MESSAGE =
+            "Файл не найден или путь к нему некорректен";
     }
 }

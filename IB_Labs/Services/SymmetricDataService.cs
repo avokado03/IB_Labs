@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using SymmetricLib.Algorithms.Contracts;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
@@ -33,7 +34,7 @@ namespace IB_Labs.Services
         /// </summary>
         /// <param name="algorithmParameters">Параметры шифрования</param>
         /// <returns>Список моделей с результатами сравнения</returns>
-        public List<AlgorithmResultModel> GetAlgorithmResults(AlgorithmParametersModel algorithmParameters)
+        public async Task<List<AlgorithmResultModel>> GetAlgorithmResults(AlgorithmParametersModel algorithmParameters)
         {
             var results = new List<AlgorithmResultModel>();
             try
@@ -52,12 +53,12 @@ namespace IB_Labs.Services
                         _stopwatch.Start();
                         alg.Encrypt(algorithmParameters, mode);
                         _stopwatch.Stop();
-                        result.EncryptionTime = (double) _stopwatch.ElapsedMilliseconds / 1000;
+                        result.EncryptionTime = RoundToSeconds.Invoke(_stopwatch.ElapsedMilliseconds);
 
                         _stopwatch.Restart();
                         alg.Decrypt(algorithmParameters, mode);
                         _stopwatch.Stop();
-                        result.DecryptionTime = (double) _stopwatch.ElapsedMilliseconds / 1000;
+                        result.DecryptionTime = RoundToSeconds.Invoke(_stopwatch.ElapsedMilliseconds);
 
                         results.Add(result);
                     }
@@ -67,7 +68,12 @@ namespace IB_Labs.Services
             {
                 throw ex;
             }
-            return results;
+            return await Task.Run(() => results);
         }
+
+        private Func<long, double> RoundToSeconds = (long ms) =>
+        {
+            return Math.Round((double)ms / 1000, 3);
+        };
     }
 }
