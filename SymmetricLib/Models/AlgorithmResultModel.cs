@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace SymmetricLib.Models
 {
@@ -37,7 +38,7 @@ namespace SymmetricLib.Models
         /// </summary>
         [DisplayName("Общее время, затраченное на обработку файла, c")]
         public double GeneralTime { 
-            get { return EncryptionTime + DecryptionTime; } 
+            get { return Math.Round(EncryptionTime + DecryptionTime, 3); } 
         }
     }
 }
