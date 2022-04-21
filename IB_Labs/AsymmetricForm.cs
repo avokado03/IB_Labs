@@ -16,5 +16,20 @@ namespace IB_Labs
         {
             InitializeComponent();
         }
+
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AsymmetricForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
