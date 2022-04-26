@@ -38,17 +38,19 @@ namespace IB_Labs
             this.fileChoiseBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.testingGroupBox = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.importPublicKeyBtn = new System.Windows.Forms.Button();
             this.publicKeyTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.encryptBtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.decryptTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.decryptFilePathTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.decryptTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.testingGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -63,6 +65,7 @@ namespace IB_Labs
             this.generateBtn.TabIndex = 7;
             this.generateBtn.Text = "Генерация и экспорт RSA-ключей";
             this.generateBtn.UseVisualStyleBackColor = true;
+            this.generateBtn.Click += new System.EventHandler(this.generateBtn_Click);
             // 
             // groupBox1
             // 
@@ -74,7 +77,6 @@ namespace IB_Labs
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Генерация ключей";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // decryptBtn
             // 
@@ -85,6 +87,7 @@ namespace IB_Labs
             this.decryptBtn.TabIndex = 10;
             this.decryptBtn.Text = "Расшифровать";
             this.decryptBtn.UseVisualStyleBackColor = true;
+            this.decryptBtn.Click += new System.EventHandler(this.decryptBtn_Click);
             // 
             // errorLabel
             // 
@@ -127,6 +130,7 @@ namespace IB_Labs
             this.fileChoiseBtn.TabIndex = 4;
             this.fileChoiseBtn.Text = "Выбор";
             this.fileChoiseBtn.UseVisualStyleBackColor = true;
+            this.fileChoiseBtn.Click += new System.EventHandler(this.fileChoiseBtn_Click);
             // 
             // label1
             // 
@@ -139,7 +143,7 @@ namespace IB_Labs
             // 
             // testingGroupBox
             // 
-            this.testingGroupBox.Controls.Add(this.button1);
+            this.testingGroupBox.Controls.Add(this.importPublicKeyBtn);
             this.testingGroupBox.Controls.Add(this.publicKeyTextBox);
             this.testingGroupBox.Controls.Add(this.label4);
             this.testingGroupBox.Controls.Add(this.encryptBtn);
@@ -155,15 +159,16 @@ namespace IB_Labs
             this.testingGroupBox.TabStop = false;
             this.testingGroupBox.Text = "Шифрование";
             // 
-            // button1
+            // importPublicKeyBtn
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(847, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 31);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Импорт";
-            this.button1.UseVisualStyleBackColor = true;
+            this.importPublicKeyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.importPublicKeyBtn.Location = new System.Drawing.Point(847, 56);
+            this.importPublicKeyBtn.Name = "importPublicKeyBtn";
+            this.importPublicKeyBtn.Size = new System.Drawing.Size(92, 31);
+            this.importPublicKeyBtn.TabIndex = 17;
+            this.importPublicKeyBtn.Text = "Импорт";
+            this.importPublicKeyBtn.UseVisualStyleBackColor = true;
+            this.importPublicKeyBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // publicKeyTextBox
             // 
@@ -197,6 +202,7 @@ namespace IB_Labs
             this.encryptBtn.TabIndex = 14;
             this.encryptBtn.Text = "Зашифровать";
             this.encryptBtn.UseVisualStyleBackColor = true;
+            this.encryptBtn.Click += new System.EventHandler(this.encryptBtn_Click);
             // 
             // groupBox2
             // 
@@ -215,39 +221,6 @@ namespace IB_Labs
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Дешифрование";
             // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(847, 50);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(92, 31);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Импорт";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // decryptTextBox
-            // 
-            this.decryptTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.decryptTextBox.Location = new System.Drawing.Point(246, 57);
-            this.decryptTextBox.Name = "decryptTextBox";
-            this.decryptTextBox.ReadOnly = true;
-            this.decryptTextBox.Size = new System.Drawing.Size(595, 22);
-            this.decryptTextBox.TabIndex = 12;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(45, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(191, 17);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Файл с приватным ключом:";
-            // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -257,6 +230,7 @@ namespace IB_Labs
             this.button3.TabIndex = 16;
             this.button3.Text = "Выбор";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // decryptFilePathTextBox
             // 
@@ -281,6 +255,50 @@ namespace IB_Labs
             this.label2.TabIndex = 14;
             this.label2.Text = "Файл данных для дешифрования:";
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(847, 50);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(92, 31);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Импорт";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // decryptTextBox
+            // 
+            this.decryptTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.decryptTextBox.Location = new System.Drawing.Point(246, 57);
+            this.decryptTextBox.Name = "decryptTextBox";
+            this.decryptTextBox.ReadOnly = true;
+            this.decryptTextBox.Size = new System.Drawing.Size(595, 22);
+            this.decryptTextBox.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(45, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(191, 17);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Файл с приватным ключом:";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "\"XML Files (*.xml)|*.xml|All files (*.*)|*.*\" + ";
+            this.openFileDialog.InitialDirectory = "С:/";
+            this.openFileDialog.Title = "Выберите файл...";
+            // 
+            // folderBrowserDialog
+            // 
+            this.folderBrowserDialog.SelectedPath = "C:\\";
+            // 
             // AsymmetricForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -293,7 +311,6 @@ namespace IB_Labs
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "AsymmetricForm";
             this.Text = "Изучение возможностей реализации асимметричного шифрования в .NET";
-            this.Load += new System.EventHandler(this.AsymmetricForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.testingGroupBox.ResumeLayout(false);
             this.testingGroupBox.PerformLayout();
@@ -315,7 +332,7 @@ namespace IB_Labs
         private System.Windows.Forms.Button fileChoiseBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox testingGroupBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button importPublicKeyBtn;
         private System.Windows.Forms.TextBox publicKeyTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button encryptBtn;
@@ -326,5 +343,7 @@ namespace IB_Labs
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox decryptFilePathTextBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }

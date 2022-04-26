@@ -26,5 +26,10 @@
         /// </summary>
         public const string FILE_NOT_FOUND_ERROR_MESSAGE =
             "Файл не найден или путь к нему некорректен";
+        /// <summary>
+        /// Сообщение, возникающее, когда формат пути не поддерживается
+        /// </summary>
+        public const string NOT_SUPPORTED_PATH_ERROR_MESSAGE =
+            @"Неверный формат пути файла. Запрещены символы / \ : * ? « < > |";
     }
 }
