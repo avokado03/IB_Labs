@@ -39,5 +39,8 @@
         /// </summary>
         public const string NOT_SUPPORTED_PATH_ERROR_MESSAGE =
             @"Неверный формат пути файла. Запрещены символы / \ : * ? « < > |";
+
+        public const string WRONG_FILE_FORMAT_ERROR_MESSAGE =
+            "Файл имеет неверный формат";
     }
 }

@@ -1,4 +1,5 @@
-﻿using AsymetricLib.Common;
+﻿using AsymetricLib;
+using AsymetricLib.Common;
 using Common;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,14 @@ namespace IB_Labs
     /// </summary>
     public partial class AsymmetricForm : Form
     {
-        private readonly KeyGenerator _keyGenerator;
+        private readonly KeyFileService _keyGenerator;
+        private readonly RSAEncryptor _encryptor;
 
         public AsymmetricForm()
         {
             InitializeComponent();
-            _keyGenerator = new KeyGenerator();
+            _keyGenerator = new KeyFileService();
+            _encryptor = new RSAEncryptor();
         }
 
         // Запускае процесс генерации ключей
@@ -36,7 +39,7 @@ namespace IB_Labs
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     dirPath = folderBrowserDialog.SelectedPath;
-                    _keyGenerator.Generate(dirPath);
+                    _keyGenerator.GenerateRSAKeyFiles(dirPath);
                     MessageBox.Show("Готово!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

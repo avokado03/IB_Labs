@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\KeyGenerator.cs" />
+    <Compile Include="Common\KeyFileService.cs" />
+    <Compile Include="Common\RSAFilesParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RSAEncryptor.cs" />
   </ItemGroup>
