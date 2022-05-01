@@ -52,6 +52,7 @@
     <Compile Include="AsymmetricForm.Designer.cs">
       <DependentUpon>AsymmetricForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\FileFilters.cs" />
     <Compile Include="Common\GlobalSupressions.cs" />
     <Compile Include="DigitalSignatureForm.cs">
       <SubType>Form</SubType>

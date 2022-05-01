@@ -1,14 +1,9 @@
 ﻿using AsymetricLib;
 using AsymetricLib.Common;
 using Common;
+using IB_Labs.Common;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security;
 using System.Windows.Forms;
 
 namespace IB_Labs
@@ -47,41 +42,76 @@ namespace IB_Labs
             {
                 errorLabel.Text = ExceptionMessages.NOT_SUPPORTED_PATH_ERROR_MESSAGE;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 errorLabel.Text = ex.Message;
             }
         }
 
-        private void fileChoiseBtn_Click(object sender, EventArgs e)
+        // выбор файла для шифрования
+        private void encryptFileChoiseBtn_Click(object sender, EventArgs e)
         {
+            openFileDialog.Filter = FileFilters.ALL;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
-                MessageBox.Show(openFileDialog.FileName);
+                encryptFilePathTextBox.Text = openFileDialog.FileName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // импорт открытого ключа
+        private void importPublicKeyBtn_Click(object sender, EventArgs e)
         {
+            openFileDialog.Filter = FileFilters.RSA_KEYS;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                publicKeyTextBox.Text = openFileDialog.FileName;
+        }
+
+        // выбор файла для дешифрации
+        private void decryptFileChoiseBtn_Click(object sender, EventArgs e)
+        {
+            openFileDialog.Filter = FileFilters.RSA_ENCRYPTED_FILES;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                decryptFilePathTextBox.Text = openFileDialog.FileName;
+        }
+
+        // импорт закрытого ключа
+        private void importPrivateKeyBtn_Click(object sender, EventArgs e)
+        {
+            openFileDialog.Filter = FileFilters.RSA_KEYS;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                privateKeyTextBox.Text = openFileDialog.FileName;
 
         }
 
+        // запускает шифрование файла
         private void encryptBtn_Click(object sender, EventArgs e)
         {
-
+            RSARun(encryptFilePathTextBox.Text, publicKeyTextBox.Text, _encryptor.EncryptFile);
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        // запускает дешифрацию файла
         private void decryptBtn_Click(object sender, EventArgs e)
         {
+            RSARun(decryptFilePathTextBox.Text, privateKeyTextBox.Text, _encryptor.DecryptFile);
+        }
 
+        // запускает операции алгоритма RSA
+        private void RSARun(string filePath, string key, Action<string, string> operation)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(key))
+                    throw new Exception(ExceptionMessages.EMPTY_FIELDS_ERROR_MESSAGE);
+                string strKey = _keyGenerator.ReadKeyFile(key);
+                operation.Invoke(filePath, strKey);
+                errorLabel.Text = "Готово!";
+            }
+            catch (XmlSyntaxException)
+            {
+                errorLabel.Text = ExceptionMessages.WRONG_FILE_FORMAT_ERROR_MESSAGE;
+            }
+            catch (Exception ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
         }
     }
 }
