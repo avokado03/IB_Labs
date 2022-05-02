@@ -43,30 +43,25 @@ namespace SymmetricLib.Algorithms.Contracts
                 .GetOutputFilePathExtension(parameters.FilePath, OutputFileExtension);
 
             using (SymmetricAlgorithm algorithm = GetAlgorithm(parameters, salt, mode))
+            using (var outputStream = new FileStream(encryptedFilePath, FileMode.Create))
             {
-                byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
-                int read;
+                outputStream.Write(salt, 0, salt.Length);
 
-                using (var outputStream = new FileStream(encryptedFilePath, FileMode.Create))
+                using (var inputStream = new FileStream(parameters.FilePath, FileMode.Open))
+                using (var cryptoStream = new CryptoStream(outputStream, algorithm.CreateEncryptor(), CryptoStreamMode.Write))
                 {
-                    outputStream.Write(salt, 0, salt.Length);
-                    using (var inputStream = new FileStream(parameters.FilePath, FileMode.Open))
+                    byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
+                    int read;
+                    try
                     {
-                        using (var cryptoStream = new CryptoStream(outputStream,
-                            algorithm.CreateEncryptor(), CryptoStreamMode.Write))
+                        while ((read = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                         {
-                            try
-                            {
-                                while ((read = inputStream.Read(buffer, 0, buffer.Length)) > 0)
-                                {
-                                    cryptoStream.Write(buffer, 0, read);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                throw ex;
-                            }
+                            cryptoStream.Write(buffer, 0, read);
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
                     }
                 }
             }
@@ -88,30 +83,24 @@ namespace SymmetricLib.Algorithms.Contracts
             {
                 inputStream.Read(salt, 0, salt.Length);
 
-                using (var algorithm = GetAlgorithm(parameters, salt, mode))
+                using (var algorithm = GetAlgorithm(parameters, salt, mode))              
+                using (var cryptoStream = new CryptoStream(inputStream, algorithm.CreateDecryptor(), CryptoStreamMode.Read))                   
+                using (var outputStream = new FileStream(parameters.FilePath, FileMode.Create))
                 {
                     byte[] buffer = new byte[AlgorithmProperties.BUFFER_SIZE];
                     int read;
-
-                    using (var cryptoStream = new CryptoStream(inputStream,
-                        algorithm.CreateDecryptor(), CryptoStreamMode.Read))
+                    try
                     {
-                        using (var outputStream = new FileStream(parameters.FilePath, FileMode.Create))
+                        while ((read = cryptoStream.Read(buffer, 0, buffer.Length)) > 0)
                         {
-                            try
-                            {
-                                while ((read = cryptoStream.Read(buffer, 0, buffer.Length)) > 0)
-                                {
-                                    outputStream.Write(buffer, 0, read);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                throw ex;
-                            }
+                            outputStream.Write(buffer, 0, read);
                         }
                     }
-                }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }             
             }
         }
     }

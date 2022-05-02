@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IB_Labs", "IB_Labs\IB_Labs.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymmetricLib", "SymmetricLib\SymmetricLib.csproj", "{F8D52B71-BF51-4051-97C3-36A4993A2AFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsymetricLib", "AsymetricLib\AsymetricLib.csproj", "{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{624204EC-B08C-4B13-BF72-2D7C206C06F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{F8D52B71-BF51-4051-97C3-36A4993A2AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8D52B71-BF51-4051-97C3-36A4993A2AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8D52B71-BF51-4051-97C3-36A4993A2AFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

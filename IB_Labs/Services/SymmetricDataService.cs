@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using SymmetricLib.Algorithms.Contracts;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
-using IB_C = IB_Labs.Common;
+using Common;
 
 namespace IB_Labs.Services
 {
@@ -40,7 +40,7 @@ namespace IB_Labs.Services
             try
             {
                 if (Strategies is null)
-                    throw new NullReferenceException(IB_C.ExceptionMessages.EMPTY_ALGORITHMS_LIST_ERROR_MESSAGE);
+                    throw new NullReferenceException(ExceptionMessages.EMPTY_ALGORITHMS_LIST_ERROR_MESSAGE);
                 foreach (var alg in Strategies)
                 {
                     var modes = AlgorithmHelpers.SupportedModes;

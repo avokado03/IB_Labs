@@ -21,7 +21,7 @@ namespace IB_Labs
         // Событие перехода к Лаб3
         private void assymmetricBtn_Click(object sender, EventArgs e)
         {
-            var assymetricForm = new AssymmetricForm();
+            var assymetricForm = new AsymmetricForm();
             assymetricForm.ShowDialog();
         }
 

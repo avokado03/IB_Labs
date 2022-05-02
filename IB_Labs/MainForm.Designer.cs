@@ -30,7 +30,7 @@ namespace IB_Labs
         private void InitializeComponent()
         {
             this.symmetricBtn = new System.Windows.Forms.Button();
-            this.assymmetricBtn = new System.Windows.Forms.Button();
+            this.asymmetricBtn = new System.Windows.Forms.Button();
             this.digitalSignatureBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -44,15 +44,15 @@ namespace IB_Labs
             this.symmetricBtn.UseVisualStyleBackColor = true;
             this.symmetricBtn.Click += new System.EventHandler(this.symmetricBtn_Click);
             // 
-            // assymmetricBtn
+            // asymmetricBtn
             // 
-            this.assymmetricBtn.Location = new System.Drawing.Point(174, 29);
-            this.assymmetricBtn.Name = "assymmetricBtn";
-            this.assymmetricBtn.Size = new System.Drawing.Size(128, 39);
-            this.assymmetricBtn.TabIndex = 1;
-            this.assymmetricBtn.Text = "Assymmetric";
-            this.assymmetricBtn.UseVisualStyleBackColor = true;
-            this.assymmetricBtn.Click += new System.EventHandler(this.assymmetricBtn_Click);
+            this.asymmetricBtn.Location = new System.Drawing.Point(174, 29);
+            this.asymmetricBtn.Name = "asymmetricBtn";
+            this.asymmetricBtn.Size = new System.Drawing.Size(128, 39);
+            this.asymmetricBtn.TabIndex = 1;
+            this.asymmetricBtn.Text = "Asymmetric";
+            this.asymmetricBtn.UseVisualStyleBackColor = true;
+            this.asymmetricBtn.Click += new System.EventHandler(this.assymmetricBtn_Click);
             // 
             // digitalSignatureBtn
             // 
@@ -70,7 +70,7 @@ namespace IB_Labs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 93);
             this.Controls.Add(this.digitalSignatureBtn);
-            this.Controls.Add(this.assymmetricBtn);
+            this.Controls.Add(this.asymmetricBtn);
             this.Controls.Add(this.symmetricBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
@@ -82,7 +82,7 @@ namespace IB_Labs
         #endregion
 
         private System.Windows.Forms.Button symmetricBtn;
-        private System.Windows.Forms.Button assymmetricBtn;
+        private System.Windows.Forms.Button asymmetricBtn;
         private System.Windows.Forms.Button digitalSignatureBtn;
     }
 }
