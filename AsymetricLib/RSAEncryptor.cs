@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Security;
 using System.Security.Cryptography;
 using AsymetricLib.Common;
-using Common;
 
 namespace AsymetricLib
 {
@@ -23,8 +23,17 @@ namespace AsymetricLib
         {
             using(var rsa = new RSACryptoServiceProvider())
             {
-                rsa.FromXmlString(publicKey);
-                return rsa.Encrypt(data, true);
+                try
+                {
+                    rsa.FromXmlString(publicKey);
+                    return rsa.Encrypt(data, true);
+                }
+                catch(Exception ex)
+                {
+                    if (ex is XmlSyntaxException)
+                        throw new Exception(ExceptionMessages.WRONG_RSA_FILE_FORMAT_ERROR_MESSAGE, ex);
+                    throw ex;
+                }
             }
         }
 

@@ -1,6 +1,5 @@
 ﻿using AsymetricLib;
 using AsymetricLib.Common;
-using Common;
 using IB_Labs.Common;
 using System;
 using System.Security;
@@ -37,10 +36,6 @@ namespace IB_Labs
                     _keyGenerator.GenerateRSAKeyFiles(dirPath);
                     MessageBox.Show("Готово!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
-            catch (NotSupportedException)
-            {
-                errorLabel.Text = ExceptionMessages.NOT_SUPPORTED_PATH_ERROR_MESSAGE;
             }
             catch (Exception ex)
             {
@@ -99,14 +94,10 @@ namespace IB_Labs
             try
             {
                 if (string.IsNullOrEmpty(filePath) || string.IsNullOrEmpty(key))
-                    throw new Exception(ExceptionMessages.EMPTY_FIELDS_ERROR_MESSAGE);
+                    throw new Exception(Common.ExceptionMessages.EMPTY_FIELDS_ERROR_MESSAGE);
                 string strKey = _keyGenerator.ReadKeyFile(key);
                 operation.Invoke(filePath, strKey);
                 errorLabel.Text = "Готово!";
-            }
-            catch (XmlSyntaxException)
-            {
-                errorLabel.Text = ExceptionMessages.WRONG_FILE_FORMAT_ERROR_MESSAGE;
             }
             catch (Exception ex)
             {

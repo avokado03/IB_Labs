@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymmetricLib", "SymmetricLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsymetricLib", "AsymetricLib\AsymetricLib.csproj", "{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{624204EC-B08C-4B13-BF72-2D7C206C06F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalSignatureLibrary", "DigitalSignatureLibrary\DigitalSignatureLibrary.csproj", "{AA6F5A61-5611-4612-A33C-235155F8D9C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0D5FB8F-F5A7-444F-ACBD-48E681FF4B42}.Release|Any CPU.Build.0 = Release|Any CPU
-		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{624204EC-B08C-4B13-BF72-2D7C206C06F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA6F5A61-5611-4612-A33C-235155F8D9C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA6F5A61-5611-4612-A33C-235155F8D9C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA6F5A61-5611-4612-A33C-235155F8D9C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA6F5A61-5611-4612-A33C-235155F8D9C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

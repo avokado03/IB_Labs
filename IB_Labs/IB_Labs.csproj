@@ -52,8 +52,8 @@
     <Compile Include="AsymmetricForm.Designer.cs">
       <DependentUpon>AsymmetricForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ExceptionMessages.cs" />
     <Compile Include="Common\FileFilters.cs" />
-    <Compile Include="Common\GlobalSupressions.cs" />
     <Compile Include="DigitalSignatureForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +77,9 @@
     </Compile>
     <EmbeddedResource Include="AsymmetricForm.resx">
       <DependentUpon>AsymmetricForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitalSignatureForm.resx">
+      <DependentUpon>DigitalSignatureForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -110,10 +113,6 @@
     <ProjectReference Include="..\AsymetricLib\AsymetricLib.csproj">
       <Project>{c0d5fb8f-f5a7-444f-acbd-48e681ff4b42}</Project>
       <Name>AsymetricLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{624204EC-B08C-4B13-BF72-2D7C206C06F3}</Project>
-      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\SymmetricLib\SymmetricLib.csproj">
       <Project>{f8d52b71-bf51-4051-97c3-36a4993a2afd}</Project>

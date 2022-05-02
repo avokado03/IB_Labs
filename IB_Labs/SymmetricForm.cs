@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using IB_Labs.Services;
 using SymmetricLib.Models;
 using System.Threading.Tasks;
-using Common;
+using IB_Labs.Common;
 
 namespace IB_Labs
 {

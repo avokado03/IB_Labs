@@ -1,16 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
-using AsymetricLib.Common;
-using Common;
 
 namespace AsymetricLib.Common
 {
-	/// <summary>
-	/// Сервис для работы с файлами
-	/// в контексте RSA-шифрования
-	/// </summary>
-	public class KeyFileService
+    /// <summary>
+    /// Сервис для работы с файлами
+    /// в контексте RSA-шифрования
+    /// </summary>
+    public class KeyFileService
 	{
 		/// <summary>
 		/// Генерирует ключи и записывает их в
@@ -36,6 +34,8 @@ namespace AsymetricLib.Common
 			}
 			catch (Exception ex)
 			{
+				if (ex is NotSupportedException)
+					throw new Exception(ExceptionMessages.NOT_SUPPORTED_PATH_ERROR_MESSAGE, ex);
 				throw ex;
 			}
 		}
@@ -56,7 +56,7 @@ namespace AsymetricLib.Common
 		public static Func<string, string> GetDecryptedFilePath = (string encryptedFilePath) => 
 		{
 			if (!encryptedFilePath.EndsWith(RSAFilesParameters.ENRYPTED_FILE_EXTENSION))
-				throw new Exception(ExceptionMessages.WRONG_FILE_FORMAT_ERROR_MESSAGE);
+				throw new Exception(ExceptionMessages.WRONG_RSA_FILE_FORMAT_ERROR_MESSAGE);
 			return encryptedFilePath.Replace(RSAFilesParameters.ENRYPTED_FILE_EXTENSION, string.Empty);
 		};
 

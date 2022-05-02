@@ -49,6 +49,7 @@
     <Compile Include="Algorithms\TripleDESStrategy.cs" />
     <Compile Include="Common\AlgorithmProperties.cs" />
     <Compile Include="Common\AlgorithmHelpers.cs" />
+    <Compile Include="Common\ExceptionMessages.cs" />
     <Compile Include="Models\AlgorithmParametersModel.cs" />
     <Compile Include="Models\AlgorithmResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
