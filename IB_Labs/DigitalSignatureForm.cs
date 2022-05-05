@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IB_Labs.Common;
 
 namespace IB_Labs
 {
@@ -24,17 +25,23 @@ namespace IB_Labs
 
         private void signFileChoiseBtn_Click(object sender, EventArgs e)
         {
-
+            openFileDialog.Filter = FileFilters.ALL;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                filePathTextBox.Text = openFileDialog.FileName;
         }
 
         private void checkSignFileChoiseBtn_Click(object sender, EventArgs e)
         {
-
+            openFileDialog.Filter = FileFilters.ALL;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                checkSignFilePathTextBox.Text = openFileDialog.FileName;
         }
 
         private void importSignatureBtn_Click(object sender, EventArgs e)
         {
-
+            openFileDialog.Filter = FileFilters.DSA_KEYS;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                signFilePathTextBox.Text = openFileDialog.FileName;
         }
 
         private void encryptBtn_Click(object sender, EventArgs e)

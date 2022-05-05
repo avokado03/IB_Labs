@@ -45,6 +45,7 @@ namespace IB_Labs
             this.checkSignFilePathTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.signGroupBox.SuspendLayout();
             this.checkSignGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -233,6 +234,10 @@ namespace IB_Labs
             this.errorLabel.Size = new System.Drawing.Size(0, 17);
             this.errorLabel.TabIndex = 13;
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
             // DigitalSignatureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -271,5 +276,6 @@ namespace IB_Labs
         private System.Windows.Forms.TextBox checkSignFilePathTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
