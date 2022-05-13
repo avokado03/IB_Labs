@@ -11,12 +11,13 @@ namespace IB_Labs.Common
         /// Расширение для диалогового окна выбора файла
         /// с применением фильтрации
         /// </summary>
-        public static string GetFilteredFileName(this OpenFileDialog fileDialog, string filter)
+        public static string GetFilteredFileName(this OpenFileDialog fileDialog, string filter, string defaultName = "")
         {
             fileDialog.Filter = filter;
+            fileDialog.FileName = string.Empty;
             if (fileDialog.ShowDialog() == DialogResult.OK)
                 return fileDialog.FileName;
-            return string.Empty;
+            return defaultName;
         }
 
         /// <summary>

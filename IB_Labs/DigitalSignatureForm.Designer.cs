@@ -36,6 +36,9 @@ namespace IB_Labs
             this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.checkSignGroupBox = new System.Windows.Forms.GroupBox();
+            this.importPublicKeyBtn = new System.Windows.Forms.Button();
+            this.publicKeyTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.importSignatureBtn = new System.Windows.Forms.Button();
             this.signFilePathTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,9 +49,6 @@ namespace IB_Labs
             this.label5 = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.importPublicKeyBtn = new System.Windows.Forms.Button();
-            this.publicKeyTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.signGroupBox.SuspendLayout();
             this.checkSignGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -142,6 +142,40 @@ namespace IB_Labs
             this.checkSignGroupBox.TabIndex = 12;
             this.checkSignGroupBox.TabStop = false;
             this.checkSignGroupBox.Text = "Проверка подписи";
+            // 
+            // importPublicKeyBtn
+            // 
+            this.importPublicKeyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.importPublicKeyBtn.Location = new System.Drawing.Point(695, 55);
+            this.importPublicKeyBtn.Name = "importPublicKeyBtn";
+            this.importPublicKeyBtn.Size = new System.Drawing.Size(92, 31);
+            this.importPublicKeyBtn.TabIndex = 20;
+            this.importPublicKeyBtn.Text = "Импорт";
+            this.importPublicKeyBtn.UseVisualStyleBackColor = true;
+            this.importPublicKeyBtn.Click += new System.EventHandler(this.importPublicKeyBtn_Click);
+            // 
+            // publicKeyTextBox
+            // 
+            this.publicKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.publicKeyTextBox.Location = new System.Drawing.Point(242, 59);
+            this.publicKeyTextBox.Name = "publicKeyTextBox";
+            this.publicKeyTextBox.ReadOnly = true;
+            this.publicKeyTextBox.Size = new System.Drawing.Size(444, 22);
+            this.publicKeyTextBox.TabIndex = 19;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(52, 62);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(174, 17);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Файл публичного ключа:";
             // 
             // importSignatureBtn
             // 
@@ -239,44 +273,6 @@ namespace IB_Labs
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(0, 17);
             this.errorLabel.TabIndex = 13;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // importPublicKeyBtn
-            // 
-            this.importPublicKeyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.importPublicKeyBtn.Location = new System.Drawing.Point(695, 55);
-            this.importPublicKeyBtn.Name = "importPublicKeyBtn";
-            this.importPublicKeyBtn.Size = new System.Drawing.Size(92, 31);
-            this.importPublicKeyBtn.TabIndex = 20;
-            this.importPublicKeyBtn.Text = "Импорт";
-            this.importPublicKeyBtn.UseVisualStyleBackColor = true;
-            this.importPublicKeyBtn.Click += new System.EventHandler(this.importPublicKeyBtn_Click);
-            // 
-            // publicKeyTextBox
-            // 
-            this.publicKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.publicKeyTextBox.Location = new System.Drawing.Point(242, 59);
-            this.publicKeyTextBox.Name = "publicKeyTextBox";
-            this.publicKeyTextBox.ReadOnly = true;
-            this.publicKeyTextBox.Size = new System.Drawing.Size(444, 22);
-            this.publicKeyTextBox.TabIndex = 19;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(52, 62);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(174, 17);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Файл публичного ключа:";
             // 
             // DigitalSignatureForm
             // 

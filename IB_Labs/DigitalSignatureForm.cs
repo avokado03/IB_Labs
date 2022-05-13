@@ -21,25 +21,25 @@ namespace IB_Labs
         // выбор подписываемого файла
         private void signFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            filePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL);
+            filePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL, filePathTextBox.Text);
         }
 
         // выбор файла для валидации
         private void checkSignFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            checkSignFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL);
+            checkSignFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL, checkSignFilePathTextBox.Text);
         }
 
         // выбор файла ЭЦП-сигнатуры
         private void importSignatureBtn_Click(object sender, EventArgs e)
         {
-            signFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ECDSA_SIGNATURE);
+            signFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ECDSA_SIGNATURE, signFilePathTextBox.Text);
         }
 
         // выбор файла с публичным ключом для ЭЦП
         private void importPublicKeyBtn_Click(object sender, EventArgs e)
         {
-            publicKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ECDSA_KEYS);
+            publicKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ECDSA_KEYS, publicKeyTextBox.Text);
         }
 
         // Запускает генерацию ЭЦП и ее запись в файл

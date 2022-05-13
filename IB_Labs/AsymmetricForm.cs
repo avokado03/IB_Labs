@@ -45,25 +45,25 @@ namespace IB_Labs
         // выбор файла для шифрования
         private void encryptFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            encryptFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL);
+            encryptFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL, encryptFilePathTextBox.Text);
         }
 
         // импорт открытого ключа
         private void importPublicKeyBtn_Click(object sender, EventArgs e)
         {
-            publicKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_KEYS);
+            publicKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_KEYS, publicKeyTextBox.Text);
         }
 
         // выбор файла для дешифрации
         private void decryptFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            decryptFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_ENCRYPTED_FILES);
+            decryptFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_ENCRYPTED_FILES, decryptFilePathTextBox.Text);
         }
 
         // импорт закрытого ключа
         private void importPrivateKeyBtn_Click(object sender, EventArgs e)
         {
-            privateKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_KEYS);
+            privateKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_KEYS, privateKeyTextBox.Text);
         }
 
         // запускает шифрование файла

@@ -24,8 +24,7 @@ namespace IB_Labs
         // Кнопка, открывающая диалог выбора файла
         private void fileChoiseBtn_Click(object sender, EventArgs e)
         {
-            if(openFileDialog.ShowDialog() == DialogResult.OK)
-                filePathTextBox.Text = openFileDialog.FileName;
+            filePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL, filePathTextBox.Text);
         }
 
         // Выбор файла
