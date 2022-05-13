@@ -183,7 +183,6 @@ namespace IB_Labs
             // 
             this.openFileDialog.InitialDirectory = "C:\\";
             this.openFileDialog.Title = "Выбор файла";
-            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
             // SymmetricForm
             // 

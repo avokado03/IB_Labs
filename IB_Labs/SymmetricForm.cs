@@ -21,29 +21,10 @@ namespace IB_Labs
             _dataService = new SymmetricDataService();
         }
 
-        // Кнопка, открывающая диалог выбора файла
+        // Выбор файла
         private void fileChoiseBtn_Click(object sender, EventArgs e)
         {
             filePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL, filePathTextBox.Text);
-        }
-
-        // Выбор файла
-        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
-        {
-            filePathTextBox.Text = string.Empty;
-            errorLabel.Text = string.Empty;
-            var fileName = openFileDialog.FileName;
-            try
-            {
-                bool isFileCorrect = openFileDialog.CheckFileExists && openFileDialog.CheckPathExists;                
-                if (!isFileCorrect)
-                    throw new FileNotFoundException
-                        (ExceptionMessages.FILE_NOT_FOUND_ERROR_MESSAGE, fileName);
-            }
-            catch (Exception ex)
-            {
-                errorLabel.Text = ex.Message;
-            }
         }
 
         // Запускает шифрацию/дешифрацию
@@ -63,6 +44,7 @@ namespace IB_Labs
             {
                 try
                 {
+                    errorLabel.Text = string.Empty;
                     summaryDataGridView.DataSource = null;
 
                     if (password == string.Empty || string.IsNullOrWhiteSpace(password))
