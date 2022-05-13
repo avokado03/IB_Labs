@@ -6,7 +6,7 @@ using SymmetricLib.Algorithms.Contracts;
 using SymmetricLib.Common;
 using SymmetricLib.Models;
 
-namespace IB_Labs.Services
+namespace SymmetricLib.Services
 {
     /// <summary>
     /// Сервис получения данных для
