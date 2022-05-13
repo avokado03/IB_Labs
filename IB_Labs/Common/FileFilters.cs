@@ -16,13 +16,18 @@
         public const string RSA_KEYS = "XML Files (*.xml)|*.xml";
 
         /// <summary>
-        /// DSA-ключи
+        /// ECDSA-ключи
         /// </summary>
-        public const string DSA_KEYS = "ECDSA Files (*.ecdsa)|*.ecdsa";
+        public const string ECDSA_KEYS = "ECDSA Files (*.ecdsa)|*.ecdsa";
 
         /// <summary>
         /// Файлы, зашифрованные RSA
         /// </summary>
         public const string RSA_ENCRYPTED_FILES = "RSA Files (*.rsa)|*.rsa";
+
+        /// <summary>
+        /// Файлы ЭЦП ECDSA
+        /// </summary>
+        public const string ECDSA_SIGNATURE = "ECDSA Signature Files (*.sign)|*.sign";
     }
 }

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ECDsaKeys.cs" />
+    <Compile Include="Common\ExceptionMessages.cs" />
+    <Compile Include="Common\FileHelpers.cs" />
     <Compile Include="SignatureService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

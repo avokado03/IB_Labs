@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Common\ExceptionMessages.cs" />
     <Compile Include="Common\FileFilters.cs" />
+    <Compile Include="Common\FormExtensions.cs" />
     <Compile Include="DigitalSignatureForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +114,10 @@
     <ProjectReference Include="..\AsymetricLib\AsymetricLib.csproj">
       <Project>{c0d5fb8f-f5a7-444f-acbd-48e681ff4b42}</Project>
       <Name>AsymetricLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DigitalSignatureLibrary\DigitalSignatureLibrary.csproj">
+      <Project>{aa6f5a61-5611-4612-a33c-235155f8d9c1}</Project>
+      <Name>DigitalSignatureLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\SymmetricLib\SymmetricLib.csproj">
       <Project>{f8d52b71-bf51-4051-97c3-36a4993a2afd}</Project>

@@ -1,52 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using IB_Labs.Common;
+using DigitalSignatureLibrary;
+using System.Linq;
 
 namespace IB_Labs
 {
+    // Форма задания для лабораторной №4
+    // (Изучение возможностей реализации алгоритмов электронной цифровой подписи в .NET)
     public partial class DigitalSignatureForm : Form
     {
+        private readonly SignatureService _signatureService;
+
         public DigitalSignatureForm()
         {
             InitializeComponent();
+            _signatureService = new SignatureService();
         }
 
-        private void signBtn_Click(object sender, EventArgs e)
-        {
-        //https://social.msdn.microsoft.com/Forums/vstudio/en-US/57b1f383-37dd-46dc-9bee-2cb6c6b73691/cryptography-ecdsa-how-to-save-private-key-to-the-file?forum=csharpgeneral
-        }
-
+        // выбор подписываемого файла
         private void signFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = FileFilters.ALL;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                filePathTextBox.Text = openFileDialog.FileName;
+            filePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL);
         }
 
+        // выбор файла для валидации
         private void checkSignFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = FileFilters.ALL;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                checkSignFilePathTextBox.Text = openFileDialog.FileName;
+            checkSignFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL);
         }
 
+        // выбор файла ЭЦП-сигнатуры
         private void importSignatureBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = FileFilters.DSA_KEYS;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                signFilePathTextBox.Text = openFileDialog.FileName;
+            signFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ECDSA_SIGNATURE);
         }
 
-        private void encryptBtn_Click(object sender, EventArgs e)
+        // выбор файла с публичным ключом для ЭЦП
+        private void importPublicKeyBtn_Click(object sender, EventArgs e)
         {
+            publicKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ECDSA_KEYS);
+        }
 
+        // Запускает генерацию ЭЦП и ее запись в файл
+        private void signBtn_Click(object sender, EventArgs e)
+        {
+            errorLabel.Text = string.Empty;
+            var filePath = filePathTextBox.Text;
+            try
+            {
+                if (string.IsNullOrEmpty(filePath))
+                    throw new Exception(ExceptionMessages.EMPTY_FIELDS_ERROR_MESSAGE);                
+                _signatureService.WriteSignatureToFile(filePath);
+                FormExtensions.GetOkMessage();
+            }
+            catch(Exception ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
+        }
+
+        // Запускает проверку ЭЦП
+        private void validateBtn_Click(object sender, EventArgs e)
+        {
+            errorLabel.Text = string.Empty;
+            var filePath = checkSignFilePathTextBox.Text;
+            var publicKeyPath = publicKeyTextBox.Text;
+            var signaturePath = signFilePathTextBox.Text;
+            bool condition = new[] { filePath, publicKeyPath, signaturePath }
+                             .Any(x => string.IsNullOrEmpty(x));
+            try
+            {
+                if (condition)
+                    throw new Exception(ExceptionMessages.EMPTY_FIELDS_ERROR_MESSAGE);
+                bool isValid = _signatureService.Validate(filePath, publicKeyPath, signaturePath);
+                errorLabel.Text = isValid ? "Подпись валидна" : "Подпись невалидна";
+            }
+            catch(Exception ex)
+            {
+                errorLabel.Text = ex.Message;
+            }
         }
     }
 }

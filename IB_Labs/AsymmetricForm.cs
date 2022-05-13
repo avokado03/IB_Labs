@@ -2,7 +2,6 @@
 using AsymetricLib.Common;
 using IB_Labs.Common;
 using System;
-using System.Security;
 using System.Windows.Forms;
 
 namespace IB_Labs
@@ -34,7 +33,7 @@ namespace IB_Labs
                 {
                     dirPath = folderBrowserDialog.SelectedPath;
                     _keyGenerator.GenerateRSAKeyFiles(dirPath);
-                    MessageBox.Show("Готово!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FormExtensions.GetOkMessage();
                 }
             }
             catch (Exception ex)
@@ -46,34 +45,25 @@ namespace IB_Labs
         // выбор файла для шифрования
         private void encryptFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = FileFilters.ALL;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                encryptFilePathTextBox.Text = openFileDialog.FileName;
+            encryptFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.ALL);
         }
 
         // импорт открытого ключа
         private void importPublicKeyBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = FileFilters.RSA_KEYS;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                publicKeyTextBox.Text = openFileDialog.FileName;
+            publicKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_KEYS);
         }
 
         // выбор файла для дешифрации
         private void decryptFileChoiseBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = FileFilters.RSA_ENCRYPTED_FILES;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                decryptFilePathTextBox.Text = openFileDialog.FileName;
+            decryptFilePathTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_ENCRYPTED_FILES);
         }
 
         // импорт закрытого ключа
         private void importPrivateKeyBtn_Click(object sender, EventArgs e)
         {
-            openFileDialog.Filter = FileFilters.RSA_KEYS;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                privateKeyTextBox.Text = openFileDialog.FileName;
-
+            privateKeyTextBox.Text = openFileDialog.GetFilteredFileName(FileFilters.RSA_KEYS);
         }
 
         // запускает шифрование файла

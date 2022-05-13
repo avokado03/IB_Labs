@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using DigitalSignatureLibrary.Common;
 
 namespace DigitalSignatureLibrary
 {
@@ -11,22 +12,22 @@ namespace DigitalSignatureLibrary
     /// </summary>
     public class SignatureService
     {
-
         /// <summary>
-        /// Записывает ЭЦП в файл
+        /// Записывает ЭЦП и публичный ключ в файлы
         /// </summary>
-        /// <param name="filePath">Путь к файлу, для которого создается файл с подписью</param>
+        /// <param name="filePath">Путь к файлу, для которого создается подпись</param>
         public void WriteSignatureToFile(string filePath)
         {
             try
             {
-                var signature = Generate(filePath);
-                var signaturePath = signatureFilePath(filePath);
+                var keys = GenerateKeys();
+                var hash = GetHash(filePath);
+                var signature = GetSignature(keys.privateKey, hash);
+                var keyFilePath = FileHelpers.getNewFileExtention(filePath, FileHelpers.ECDSA_KEY_EXTENSION);
+                var signaturePath = FileHelpers.getNewFileExtention(filePath, FileHelpers.SIGNATURE_FILE_EXTENSION);
 
-                using(var streamWriter = new StreamWriter(signaturePath))
-                {
-                    streamWriter.Write(signature);
-                }
+                File.WriteAllBytes(keyFilePath, keys.publicKey);
+                File.WriteAllBytes(signaturePath, signature);
             }
             catch(Exception ex)
             {
@@ -39,32 +40,31 @@ namespace DigitalSignatureLibrary
         /// Проверяет целостность файла по подписи
         /// </summary>
         /// <param name="filePath">Путь к файлу, который подлежит валидации</param>
+        /// <param name="publicKeyPath">Путь к файлу с публичным ключом</param>
         /// <param name="signatureFilePath">Путь к файлу с подписью</param>
-        public bool Validate(string filePath, string signatureFilePath)
+        public bool Validate(string filePath, string publicKeyPath, string signatureFilePath)
         {
-            byte[] signature;
+            byte[] signature, publicKey, hash;
             CngKey cngKey;
             bool isValid;
 
             try
             {
-                using (var streamReader = new StreamReader(signatureFilePath))
-                using (var memoryStream = new MemoryStream())
-                {
-                    streamReader.BaseStream.CopyTo(memoryStream);
-                    signature = memoryStream.ToArray();
-                }
-
-                cngKey = CngKey.Import(signature, CngKeyBlobFormat.EccPrivateBlob);
-
+                signature = FileHelpers.GetByteArrayFromFile(signatureFilePath);
+                publicKey = FileHelpers.GetByteArrayFromFile(publicKeyPath);
+                cngKey = CngKey.Import(publicKey, CngKeyBlobFormat.EccPublicBlob);
+                
                 using(var dsa = new ECDsaCng(cngKey))
-                using(var streamReader = new StreamReader(filePath))
                 {
-                    isValid = dsa.VerifyData(streamReader.BaseStream, signature);
+                    hash = GetHash(filePath);
+                    isValid = dsa.VerifyHash(hash, signature);
                 }
 
                 return isValid;
-
+            }
+            catch (CryptographicException cEx)
+            {
+                throw new Exception(ExceptionMessages.INVALID_KEY_IMPORT_EXCEPTION, cEx);
             }
             catch (Exception ex)
             {
@@ -73,29 +73,68 @@ namespace DigitalSignatureLibrary
         }
 
         /// <summary>
-        /// Создает цифровую подпись
+        /// Генерация ключей
         /// </summary>
-        /// <param name="filePath">Путь к файлу, для которого генерируется подпись</param>
-        private byte[] Generate(string filePath)
+        private ECDsaKeys GenerateKeys()
         {
-            CngKeyCreationParameters keyCreationParameters = new CngKeyCreationParameters();
-            keyCreationParameters.ExportPolicy = CngExportPolicies.AllowExport;
-            keyCreationParameters.KeyUsage = CngKeyUsages.Signing;
-
-            CngKey key = CngKey.Create(CngAlgorithm.ECDsaP256, null, keyCreationParameters);
-            byte[] signature;
-
-            using (ECDsaCng dsa = new ECDsaCng(key))
-            using (var streamReader = new StreamReader(filePath))
+            CngKeyCreationParameters keyCreationParameters = new CngKeyCreationParameters()
             {
-                signature = dsa.SignData(streamReader.BaseStream);
-            }
-            return signature;
+                ExportPolicy = CngExportPolicies.AllowPlaintextExport,
+                KeyCreationOptions = CngKeyCreationOptions.OverwriteExistingKey,
+                UIPolicy = new CngUIPolicy(CngUIProtectionLevels.ProtectKey),
+                KeyUsage = CngKeyUsages.Signing
+            };
+            CngKey key = CngKey.Create(CngAlgorithm.ECDsaP256, null, keyCreationParameters);
+
+            byte[] privateKey = key.Export(CngKeyBlobFormat.EccPrivateBlob);
+            byte[] publicKey = key.Export(CngKeyBlobFormat.EccPublicBlob);
+
+            return new ECDsaKeys { privateKey = privateKey, publicKey = publicKey };
         }
 
-        private static string _signatureFileExtension = ".ecdsa";
+        /// <summary>
+        /// Вычисляет хэш данных
+        /// </summary>
+        /// <param name="filePath">Путь к файлу</param>
+        private byte[] GetHash (string filePath)
+        {
+            byte[] hash = new byte[256];
+            using (SHA256Cng sha = new SHA256Cng())
+            using (var fileStream = new FileStream(filePath, FileMode.Open))
+            {
+                hash = sha.ComputeHash(fileStream);
+            }
+            return hash;
+        }
 
-        private Func<string, string> signatureFilePath = (string filePath) => 
-            string.Format("{0}{1}", filePath, _signatureFileExtension);
+        /// <summary>
+        /// Создает сигнатуру
+        /// </summary>
+        private byte[] GetSignature(byte[] publicKey, byte[] hash)
+        {
+            byte[] signature;
+            try
+            {
+                var key = CngKey.Import(publicKey, CngKeyBlobFormat.EccPrivateBlob);
+                using (ECDsaCng dsa = new ECDsaCng(key))
+                {
+                    signature = dsa.SignHash(hash);
+                }
+
+                return signature;
+            }
+            catch (ArgumentNullException aEx)
+            {
+                throw new Exception(ExceptionMessages.NULL_HASH_EXCEPTION, aEx);
+            }
+            catch(CryptographicException cEx)
+            {
+                throw new Exception(ExceptionMessages.INVALID_KEY_IMPORT_EXCEPTION, cEx);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
